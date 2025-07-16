@@ -76,6 +76,50 @@ public:
     }
 };
 
+class Polygon : public Shape {
+    vector<pair<float, float>> points;
+
+public:
+    Polygon(const vector<pair<float, float>>& pts,
+            string stroke, string fill, float strokeW, float fillO, float strokeO)
+        : Shape(stroke, fill, strokeW, fillO, strokeO), points(pts) {}
+
+    string toSVG() const override {
+        ostringstream oss;
+        oss << "<polygon points=\"";
+        for (auto& p : points)
+            oss << p.first << "," << p.second << " ";
+        oss << "\" stroke=\"" << strokeColor << "\" fill=\"" << fillColor
+            << "\" stroke-width=\"" << strokeWidth << "\" fill-opacity=\"" << fillOpacity
+            << "\" stroke-opacity=\"" << strokeOpacity << "\" />\n";
+        return oss.str();
+    }
+};
+
+class Text : public Shape {
+    float x, y;
+    string content;
+    int fontSize;
+
+public:
+    Text(float x, float y, string content, int size, string color)
+        : Shape(color, "none", 0, 0, 1.0), x(x), y(y), content(content), fontSize(size) {}
+
+    string toSVG() const override {
+        ostringstream oss;
+        oss << "<text x=\"" << x << "\" y=\"" << y << "\" fill=\"" << strokeColor
+            << "\" font-size=\"" << fontSize << "\">" << content << "</text>\n";
+        return oss.str();
+    }
+};
+
+class Square : public Rectangle {
+public:
+    Square(float x, float y, float side,
+           string stroke, string fill, float strokeW, float fillO, float strokeO)
+        : Rectangle(x, y, side, side, stroke, fill, strokeW, fillO, strokeO) {}
+};
+
 
 
 int main() {
@@ -83,7 +127,9 @@ int main() {
 
     shapes.push_back(new Rectangle(20, 20, 800, 400, "rgb(55,55,55)", "rgb(200,100,150)", 2, 0.2, 1.0));
     shapes.push_back(new Circle(200, 300, 100, "rgb(0,255,255)", "rgb(255,255,0)", 10, 0.5, 0.7));
-
+    shapes.push_back(new Text(0, 0, "SVG Demo", 40, "rgb(0,0,255)"));
+    shapes.push_back(new Square(600, 300, 100, "black", "red", 3, 0.4, 1.0));
+    
     cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\">\n";
     for (auto s : shapes) {
         cout << s->toSVG();
