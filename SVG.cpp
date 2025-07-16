@@ -120,6 +120,12 @@ public:
         : Rectangle(x, y, side, side, stroke, fill, strokeW, fillO, strokeO) {}
 };
 
+class Triangle : public Polygon {
+public:
+    Triangle(pair<float, float> p1, pair<float, float> p2, pair<float, float> p3,
+             string stroke, string fill, float strokeW, float fillO, float strokeO)
+        : Polygon({p1, p2, p3}, stroke, fill, strokeW, fillO, strokeO) {}
+};
 
 
 int main() {
@@ -129,6 +135,7 @@ int main() {
     shapes.push_back(new Circle(200, 300, 100, "rgb(0,255,255)", "rgb(255,255,0)", 10, 0.5, 0.7));
     shapes.push_back(new Text(0, 0, "SVG Demo", 40, "rgb(0,0,255)"));
     shapes.push_back(new Square(600, 300, 100, "black", "red", 3, 0.4, 1.0));
+    shapes.push_back(new Triangle({100, 500}, {200, 700}, {0, 700}, "green", "blue", 2, 0.6, 0.9));
     
     cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\">\n";
     for (auto s : shapes) {
