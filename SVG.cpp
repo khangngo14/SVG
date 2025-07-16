@@ -205,21 +205,30 @@ private:
 
 int main() {
     vector<Shape*> shapes;
-
-    shapes.push_back(new Ellipse(400, 500, 300, 80, "none", "lightblue", 0, 0.5, 1.0));
-    shapes.push_back(new Star(400, 200, 60, 30, "orange", "yellow", 4, 0.9, 1.0));
-    vector<pair<float, float>> mountainPoints = {
-        {100, 500}, {300, 300}, {500, 500}
-    };
-    shapes.push_back(new Polygon(mountainPoints, "darkgreen", "lightgreen", 2, 1.0, 1.0));
-    vector<pair<float, float>> birdPoints = {
-        {600, 200}, {620, 180}, {640, 200}
-    };
-    shapes.push_back(new Polyline(birdPoints, "black", "none", 2, 0, 1.0));
-
-
-
-
+    shapes.push_back(new Rectangle(0, 0, 900, 700, "black", "white", 4, 1.0, 1.0));
+    shapes.push_back(new Text(300, 50, "SVG Shape Showcase", 32, "black"));
+    shapes.push_back(new Rectangle(50, 100, 100, 60, "black", "lightblue", 2, 1.0, 1.0));
+    shapes.push_back(new Text(60, 190, "Rectangle", 14, "black"));
+    shapes.push_back(new Circle(250, 130, 40, "red", "pink", 2, 1.0, 1.0));
+    shapes.push_back(new Text(230, 190, "Circle", 14, "black"));
+    shapes.push_back(new Ellipse(400, 130, 60, 30, "blue", "lightgreen", 2, 1.0, 1.0));
+    shapes.push_back(new Text(370, 190, "Ellipse", 14, "black"));
+    shapes.push_back(new Line(500, 110, 580, 170, "black", 3, 1.0));
+    shapes.push_back(new Text(520, 190, "Line", 14, "black"));
+    shapes.push_back(new Polyline({{650, 110}, {670, 90}, {690, 110}}, "purple", "none", 2, 0.0, 1.0));
+    shapes.push_back(new Text(640, 190, "Polyline", 14, "black"));
+    vector<pair<float, float>> polyPts = {{100, 260}, {120, 240}, {140, 260}, {130, 280}, {110, 280}};
+    shapes.push_back(new Polygon(polyPts, "green", "yellow", 2, 1.0, 1.0));
+    shapes.push_back(new Text(100, 310, "Polygon", 14, "black"));
+    shapes.push_back(new Square(250, 240, 60, "black", "orange", 2, 1.0, 1.0));
+    shapes.push_back(new Text(255, 310, "Square", 14, "black"));
+    shapes.push_back(new Triangle({370, 300}, {420, 220}, {470, 300}, "darkblue", "cyan", 2, 1.0, 1.0));
+    shapes.push_back(new Text(400, 310, "Triangle", 14, "black"));
+    shapes.push_back(new Hexagon(600, 270, 50, "magenta", "lightgray", 2, 1.0, 1.0));
+    shapes.push_back(new Text(580, 330, "Hexagon", 14, "black"));
+    shapes.push_back(new Star(750, 270, 50, 20, "orange", "gold", 2, 1.0, 1.0));
+    shapes.push_back(new Text(740, 330, "Star", 14, "black"));
+    shapes.push_back(new Text(300, 650, "Created by Ngo Hoang Minh Khang - 21126070", 16, "black"));
     
     cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\">\n";
     for (auto s : shapes) {
