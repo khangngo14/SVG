@@ -144,6 +144,65 @@ private:
     }
 };
 
+
+
+class Ellipse : public Shape {
+    float cx, cy, rx, ry;
+
+public:
+    Ellipse(float cx, float cy, float rx, float ry,
+            string stroke, string fill, float strokeW, float fillO, float strokeO)
+        : Shape(stroke, fill, strokeW, fillO, strokeO), cx(cx), cy(cy), rx(rx), ry(ry) {}
+
+    string toSVG() const override {
+        ostringstream oss;
+        oss << "<ellipse cx=\"" << cx << "\" cy=\"" << cy << "\" rx=\"" << rx
+            << "\" ry=\"" << ry << "\" stroke=\"" << strokeColor
+            << "\" fill=\"" << fillColor << "\" stroke-width=\"" << strokeWidth
+            << "\" fill-opacity=\"" << fillOpacity << "\" stroke-opacity=\"" << strokeOpacity << "\" />\n";
+        return oss.str();
+    }
+};
+
+class Polyline : public Shape {
+    vector<pair<float, float>> points;
+
+public:
+    Polyline(const vector<pair<float, float>>& pts,
+             string stroke, string fill, float strokeW, float fillO, float strokeO)
+        : Shape(stroke, fill, strokeW, fillO, strokeO), points(pts) {}
+
+    string toSVG() const override {
+        ostringstream oss;
+        oss << "<polyline points=\"";
+        for (auto& p : points)
+            oss << p.first << "," << p.second << " ";
+        oss << "\" stroke=\"" << strokeColor << "\" fill=\"" << fillColor
+            << "\" stroke-width=\"" << strokeWidth << "\" fill-opacity=\"" << fillOpacity
+            << "\" stroke-opacity=\"" << strokeOpacity << "\" />\n";
+        return oss.str();
+    }
+};
+
+
+class Star : public Polygon {
+public:
+    Star(float cx, float cy, float outerR, float innerR,
+         string stroke, string fill, float strokeW, float fillO, float strokeO)
+        : Polygon(generateStarPoints(cx, cy, outerR, innerR), stroke, fill, strokeW, fillO, strokeO) {}
+
+private:
+    static vector<pair<float, float>> generateStarPoints(float cx, float cy, float R, float r) {
+        vector<pair<float, float>> pts;
+        for (int i = 0; i < 10; ++i) {
+            float angle = i * M_PI / 5; 
+            float radius = (i % 2 == 0) ? R : r;
+            pts.emplace_back(cx + radius * cos(angle), cy + radius * sin(angle));
+        }
+        return pts;
+    }
+};
+
 int main() {
     vector<Shape*> shapes;
 
@@ -153,7 +212,11 @@ int main() {
     shapes.push_back(new Square(600, 300, 100, "black", "red", 3, 0.4, 1.0));
     shapes.push_back(new Triangle({100, 500}, {200, 700}, {0, 700}, "green", "blue", 2, 0.6, 0.9));
     shapes.push_back(new Hexagon(800, 200, 75, "rgb(255,0,102)", "rgb(153,204,255)", 10, 0.5, 0.7));
-
+    shapes.push_back(new Star(400, 500, 100, 40, "red", "yellow", 10, 0.6, 0.7));
+    vector<pair<float, float>> starPoints = {{350,75},{379,161},{469,161},{397,215},{423,301},{350,250},
+                                             {277,301},{303,215},{231,161},{321,161}};
+    shapes.push_back(new Polygon(starPoints, "rgb(255,0,0)", "rgb(255,255,0)", 10, 0.6, 0.7));
+    
     cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\">\n";
     for (auto s : shapes) {
         cout << s->toSVG();
