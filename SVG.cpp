@@ -206,16 +206,13 @@ private:
 int main() {
     vector<Shape*> shapes;
 
-    shapes.push_back(new Rectangle(20, 20, 800, 400, "rgb(55,55,55)", "rgb(200,100,150)", 2, 0.2, 1.0));
-    shapes.push_back(new Circle(200, 300, 100, "rgb(0,255,255)", "rgb(255,255,0)", 10, 0.5, 0.7));
-    shapes.push_back(new Text(0, 0, "SVG Demo", 40, "rgb(0,0,255)"));
-    shapes.push_back(new Square(600, 300, 100, "black", "red", 3, 0.4, 1.0));
-    shapes.push_back(new Triangle({100, 500}, {200, 700}, {0, 700}, "green", "blue", 2, 0.6, 0.9));
-    shapes.push_back(new Hexagon(800, 200, 75, "rgb(255,0,102)", "rgb(153,204,255)", 10, 0.5, 0.7));
-    shapes.push_back(new Star(400, 500, 100, 40, "red", "yellow", 10, 0.6, 0.7));
-    vector<pair<float, float>> starPoints = {{350,75},{379,161},{469,161},{397,215},{423,301},{350,250},
-                                             {277,301},{303,215},{231,161},{321,161}};
-    shapes.push_back(new Polygon(starPoints, "rgb(255,0,0)", "rgb(255,255,0)", 10, 0.6, 0.7));
+    shapes.push_back(new Rectangle(0, 0, 400, 200, "black", "white", 2, 1.0, 1.0));
+    shapes.push_back(new Text(20, 50, "Nguyen Van A", 24, "black"));
+    shapes.push_back(new Text(20, 90, "Software Engineer", 16, "gray"));
+    shapes.push_back(new Text(20, 130, "Email: nguyenvana@example.com", 14, "black"));
+    shapes.push_back(new Circle(350, 50, 30, "blue", "cyan", 3, 0.7, 1.0));  
+
+
     
     cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\">\n";
     for (auto s : shapes) {
