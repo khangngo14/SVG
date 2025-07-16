@@ -58,6 +58,23 @@ public:
     }
 };
 
+class Circle : public Shape {
+    float cx, cy, r;
+
+public:
+    Circle(float cx, float cy, float r,
+           string stroke, string fill, float strokeW, float fillO, float strokeO)
+        : Shape(stroke, fill, strokeW, fillO, strokeO), cx(cx), cy(cy), r(r) {}
+
+    string toSVG() const override {
+        ostringstream oss;
+        oss << "<circle cx=\"" << cx << "\" cy=\"" << cy << "\" r=\"" << r
+            << "\" stroke=\"" << strokeColor << "\" fill=\"" << fillColor
+            << "\" stroke-width=\"" << strokeWidth << "\" fill-opacity=\"" << fillOpacity
+            << "\" stroke-opacity=\"" << strokeOpacity << "\" />\n";
+        return oss.str();
+    }
+};
 
 
 
@@ -65,6 +82,7 @@ int main() {
     vector<Shape*> shapes;
 
     shapes.push_back(new Rectangle(20, 20, 800, 400, "rgb(55,55,55)", "rgb(200,100,150)", 2, 0.2, 1.0));
+    shapes.push_back(new Circle(200, 300, 100, "rgb(0,255,255)", "rgb(255,255,0)", 10, 0.5, 0.7));
 
     cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\">\n";
     for (auto s : shapes) {
