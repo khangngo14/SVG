@@ -127,6 +127,22 @@ public:
         : Polygon({p1, p2, p3}, stroke, fill, strokeW, fillO, strokeO) {}
 };
 
+class Hexagon : public Polygon {
+public:
+    Hexagon(float cx, float cy, float radius,
+            string stroke, string fill, float strokeW, float fillO, float strokeO)
+        : Polygon(generateHexagonPoints(cx, cy, radius), stroke, fill, strokeW, fillO, strokeO) {}
+
+private:
+    static vector<pair<float, float>> generateHexagonPoints(float cx, float cy, float r) {
+        vector<pair<float, float>> pts;
+        for (int i = 0; i < 6; ++i) {
+            float angle = M_PI / 3 * i;  
+            pts.emplace_back(cx + r * cos(angle), cy + r * sin(angle));
+        }
+        return pts;
+    }
+};
 
 int main() {
     vector<Shape*> shapes;
@@ -136,7 +152,8 @@ int main() {
     shapes.push_back(new Text(0, 0, "SVG Demo", 40, "rgb(0,0,255)"));
     shapes.push_back(new Square(600, 300, 100, "black", "red", 3, 0.4, 1.0));
     shapes.push_back(new Triangle({100, 500}, {200, 700}, {0, 700}, "green", "blue", 2, 0.6, 0.9));
-    
+    shapes.push_back(new Hexagon(800, 200, 75, "rgb(255,0,102)", "rgb(153,204,255)", 10, 0.5, 0.7));
+
     cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\">\n";
     for (auto s : shapes) {
         cout << s->toSVG();
