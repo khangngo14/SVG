@@ -206,12 +206,17 @@ private:
 int main() {
     vector<Shape*> shapes;
 
-    shapes.push_back(new Circle(400, 300, 50, "orange", "yellow", 4, 1.0, 1.0));  // Sun
-    shapes.push_back(new Circle(200, 300, 20, "blue", "cyan", 2, 1.0, 1.0));     // Earth
-    shapes.push_back(new Circle(120, 300, 10, "gray", "lightgray", 1, 1.0, 1.0));// Moon
-    shapes.push_back(new Text(390, 310, "Sun", 16, "black"));
-    shapes.push_back(new Text(190, 320, "Earth", 14, "black"));
-    shapes.push_back(new Text(110, 320, "Moon", 12, "black"));
+    shapes.push_back(new Ellipse(400, 500, 300, 80, "none", "lightblue", 0, 0.5, 1.0));
+    shapes.push_back(new Star(400, 200, 60, 30, "orange", "yellow", 4, 0.9, 1.0));
+    vector<pair<float, float>> mountainPoints = {
+        {100, 500}, {300, 300}, {500, 500}
+    };
+    shapes.push_back(new Polygon(mountainPoints, "darkgreen", "lightgreen", 2, 1.0, 1.0));
+    vector<pair<float, float>> birdPoints = {
+        {600, 200}, {620, 180}, {640, 200}
+    };
+    shapes.push_back(new Polyline(birdPoints, "black", "none", 2, 0, 1.0));
+
 
 
 
