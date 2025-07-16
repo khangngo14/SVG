@@ -206,11 +206,13 @@ private:
 int main() {
     vector<Shape*> shapes;
 
-    shapes.push_back(new Rectangle(0, 0, 400, 200, "black", "white", 2, 1.0, 1.0));
-    shapes.push_back(new Text(20, 50, "Nguyen Van A", 24, "black"));
-    shapes.push_back(new Text(20, 90, "Software Engineer", 16, "gray"));
-    shapes.push_back(new Text(20, 130, "Email: nguyenvana@example.com", 14, "black"));
-    shapes.push_back(new Circle(350, 50, 30, "blue", "cyan", 3, 0.7, 1.0));  
+    shapes.push_back(new Circle(400, 300, 50, "orange", "yellow", 4, 1.0, 1.0));  // Sun
+    shapes.push_back(new Circle(200, 300, 20, "blue", "cyan", 2, 1.0, 1.0));     // Earth
+    shapes.push_back(new Circle(120, 300, 10, "gray", "lightgray", 1, 1.0, 1.0));// Moon
+    shapes.push_back(new Text(390, 310, "Sun", 16, "black"));
+    shapes.push_back(new Text(190, 320, "Earth", 14, "black"));
+    shapes.push_back(new Text(110, 320, "Moon", 12, "black"));
+
 
 
     
